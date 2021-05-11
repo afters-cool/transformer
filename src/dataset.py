@@ -53,7 +53,10 @@ class OzeDataset(Dataset):
         Z = dataset['Z'].astype(np.float32)
 
         m = Z.shape[0]  # Number of training example
-        K = Z.shape[1]  # Time serie length
+        K = Z.shape[-1]  # Time serie length
+
+        Z = Z.transpose((0, 2, 1))
+        X = X.transpose((0, 2, 1))
 
         R = np.tile(R[:, np.newaxis, :], (1, K, 1))
 

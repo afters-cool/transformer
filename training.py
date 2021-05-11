@@ -18,7 +18,8 @@ from src.metrics import MSE
 
 
 # Training parameters
-DATASET_PATH = 'datasets/dataset_CAPT_v7.npz'
+#DATASET_PATH = 'datasets/dataset_CAPT_v7.npz'
+DATASET_PATH = 'dataset/time-series-transformer/dataset/dataset.npz'
 BATCH_SIZE = 8
 NUM_WORKERS = 0
 LR = 2e-4
@@ -35,7 +36,7 @@ dropout = 0.2  # Dropout rate
 pe = None  # Positional encoding
 chunk_mode = None
 
-d_input = 38  # From dataset
+d_input = 37  # From dataset
 d_output = 8  # From dataset
 
 # Config
@@ -46,8 +47,10 @@ print(f"Using device {device}")
 ozeDataset = OzeDataset(DATASET_PATH)
 
 # Split between train, validation and test
+# dataset_train, dataset_val, dataset_test = random_split(
+#     ozeDataset, (38000, 1000, 1000))
 dataset_train, dataset_val, dataset_test = random_split(
-    ozeDataset, (38000, 1000, 1000))
+    ozeDataset, (5500, 1000, 1000))
 
 dataloader_train = DataLoader(dataset_train,
                               batch_size=BATCH_SIZE,
